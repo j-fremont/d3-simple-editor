@@ -8,7 +8,7 @@ const fs = require('fs');
 const config = require('./src/config');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/diagrams', {useNewUrlParser: true});
+mongoose.connect('mongodb://192.168.1.10/diagrams', {useNewUrlParser: true});
 
 var db = mongoose.connection;
 

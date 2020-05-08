@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  d3-simple-editor:
+    image: d3-simple-editor:latest
+    restart: always
+    networks:
+      - d3-editor
+    ports:
+      - '3007:3000'
+  rpi-mongo:
+    image: dhermanns/rpi-mongo:latest
+    restart: always
+    command: "/opt/mongodb/bin/mongod"
+    networks:
+      - d3-editor
+    ports:
+      - "27017:27017"
+      - "27018:27018"
+      - "27019:27019"
+      - "28017:28017"
+
+volumes:
+  grafana-storage:
+
+networks:
+  d3-editor:

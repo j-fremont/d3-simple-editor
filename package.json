@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
+    "concurrently": "^3.6.1",
     "cors": "^2.8.5",
     "d3": "^5.9.7",
     "express": "^4.17.1",
@@ -24,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"node server.js\" \"npm start\""
   },
   "eslintConfig": {
     "extends": "react-app"
