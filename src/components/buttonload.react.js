@@ -23,9 +23,6 @@ export default class MyButtonLoad extends React.Component {
   componentDidMount() {
     axios.get("http://" + config.server.host + ":" + config.server.port + "/list")
       .then((response) => {
-
-        console.log(response.data);
-
         this.setState({
           names: response.data,
           select: response.data[0]
@@ -61,7 +58,7 @@ export default class MyButtonLoad extends React.Component {
 
   render() {
 
-    const options = this.state.names.map(name => { return(<option onClick={this.select}>{name}</option>) });
+    const options = this.state.names.map(name => { return(<option>{name}</option>) });
 
     return (
       <Button onClick={this.toggle} color="light"><FontAwesomeIcon icon={faUpload} />
@@ -70,7 +67,7 @@ export default class MyButtonLoad extends React.Component {
           <ModalBody>
             <FormGroup row>
               <Col sm={10}>
-                <Input type="select" name="select" id="exampleSelect">
+                <Input type="select" onClick={this.select}>
                 {options}
                 </Input>
               </Col>

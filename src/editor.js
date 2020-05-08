@@ -53,8 +53,8 @@ export default class Editor {
 			{id: 7, x: 110, y: 250, type: 'style2', text: '#icon-8'},
 			{id: 8, x: 40, y: 320, type: 'style3', text: '#icon-9'},
 			{id: 9, x: 110, y: 320, type: 'style3', text: '#icon-10'},
-			{id: 8, x: 40, y: 390, type: 'style3', text: '#icon-11'},
-			{id: 9, x: 110, y: 390, type: 'style3', text: '#icon-12'}
+			{id: 10, x: 40, y: 390, type: 'style3', text: '#icon-11'},
+			{id: 11, x: 110, y: 390, type: 'style3', text: '#icon-12'}
 		];
 
 		this.nodeId = 10; // Id du dernier noeud créé (cet id est un incrément, les ids inférieurs à la valeur de départ sont réservés aux noeuds de la palette)
@@ -609,8 +609,8 @@ export default class Editor {
 			{id: 7, x: 110, y: 250, type: 'style2', text: '#icon-8'},
 			{id: 8, x: 40, y: 320, type: 'style3', text: '#icon-9'},
 			{id: 9, x: 110, y: 320, type: 'style3', text: '#icon-10'},
-			{id: 8, x: 40, y: 390, type: 'style3', text: '#icon-11'},
-			{id: 9, x: 110, y: 390, type: 'style3', text: '#icon-12'}
+			{id: 10, x: 40, y: 390, type: 'style3', text: '#icon-11'},
+			{id: 11, x: 110, y: 390, type: 'style3', text: '#icon-12'}
 		];
 
 		nodesAndLinks.nodes.forEach(node => { this.nodes.push(node); })
