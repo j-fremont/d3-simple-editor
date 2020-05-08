@@ -32,11 +32,10 @@ app.get('/load/:name', (request, response) => {
 });
 
 app.get('/list', (request, response) => {
-	fs.readdir("./data/", (err, files) => {
-  	const names = files.map(file => file.split('.')[0]);
-		response.send(names);
-	});
-
+  fs.readdir("./data/", (err, files) => {
+    const names = files.map(file => file.split('.')[0]);
+      response.send(names);
+  });
 });
 
 http.listen(config.server.port, () => {

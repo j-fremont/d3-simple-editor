@@ -8,6 +8,7 @@ services:
 #      - d3-editor
     ports:
       - '3007:3000'
+      - '9000:9000'
 #  rpi-mongo:
 #    image: dhermanns/rpi-mongo:latest
 #    restart: always
