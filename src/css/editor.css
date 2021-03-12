@@ -41,6 +41,15 @@ path.link.hidden {
   stroke-width: 1.5px;
 }
 
+path.grid {
+  stroke: #A4A4A4;
+  stroke-width: 1px;
+}
+
+path.grid.hidden {
+  stroke-width: 0;
+}
+
 .selection {
     fill: #ADD8E6;
     stroke: #ADD8E6;

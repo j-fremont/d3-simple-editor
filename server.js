@@ -15,7 +15,7 @@ app.use(parser.json());
 
 app.post('/save/:name', (request, response) => {
   var name = request.param("name");
-	const json = JSON.stringify(request.body);
+  const json = JSON.stringify(request.body);
   fs.writeFile("./data/" + name + ".json", json, (error) => {
     if (error) {
       console.log(error);

@@ -1,4 +1,5 @@
 import React from 'react';
+import * as d3 from 'd3';
 import '../css/editor.css';
 
 const style = {
@@ -6,9 +7,10 @@ const style = {
 };
 
 export default class MySchema extends React.Component {
+  
   render() {
     return (
-            <svg height="800" width="1200" style={style}>
+            <svg height="600" width="1200" style={style}>
               <defs>
                 <linearGradient id="FirstGradient" x1="0" x2="0" y1="0" y2="1">
                   <stop offset="0%" stop-color="#086A87"/>
@@ -84,6 +86,7 @@ export default class MySchema extends React.Component {
                 </g>
 
               </defs>
+              <path id="grid" className="grid" />
               <g id="palette"/>
               <g id="paths"/>
               <g id="icons"/>
