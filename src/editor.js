@@ -310,7 +310,6 @@ export default class Editor {
 
   // dragStarted : gestion du début de glissé d'un noeud (drag).
   dragStarted = (d) => {
-    d3.event.sourceEvent.stopPropagation();
     this.currentDrag.node = d;
     if (d.x<this.PALETTE_WIDTH) {
       // Si l'icone qui est glissé provient de la palette (x<PALETTE_SIZE), on créé immédiatement un nouvel icone dans la palette pour le remplacer.
@@ -326,33 +325,35 @@ export default class Editor {
   dragged = (d) => {
     d.x = d3.event.x;
     d.y = d3.event.y;
-    //console.log(d.x + ',' + d.y);
-
-    //if (d.x%5===0 || d.y%5===0) {
-
-      // Pendant le glissé : modification des coordonnées de l'icone et de son opacité...
-      d3.select("#node"+d.id).attr('transform', (d) => `translate(${d.x},${d.y})`).style("opacity", 0.2);
-      // ...puis modification des coordonnées des liens qui ont cet icone pour élement source...
-      this.repositionLinks(this.currentDrag.sourceLinks);
-      // ...et enfin modification des coordonnées des liens qui ont cet icone pour élement cible.
-      this.repositionLinks(this.currentDrag.targetLinks);
-
-    //}
+    // Dans les limites des coordonnées du schéma...
+    if ( d.x > this.PALETTE_WIDTH+this.CELL_SIZE &&
+      d.x < this.WIDTH-this.CELL_SIZE &&
+      d.y > 25 &&
+      d.y < 525) {
+      d3.select("#node"+d.id).attr('transform', (d) => `translate(${d.x},${d.y})`).style("opacity", 0.2); // ...modification des coordonnées de l'icone...
+      this.repositionLinks(this.currentDrag.sourceLinks); // ...modification des coordonnées des liens qui ont cet icone pour élément source...
+      this.repositionLinks(this.currentDrag.targetLinks); // ...et modification des coordonnées des liens qui ont cet icone pour élément cible.
+    }
   };
 
   // dragEnded : gestion du déposé d'un noeud (drop).
   dragEnded = (d) => {
-    if (d.x<this.PALETTE_WIDTH) { // Si la coordonnées x du noeud déposé est dans la palette...
-      this.removeNodes([this.currentDrag.node]); // ...supprime ce noeud...
-      this.removeLinks(this.links.filter((l) => l.source === this.currentDrag.node || l.target === this.currentDrag.node));
-    } else {
-      d3.select("#node"+d.id).style("opacity", 1.0); // Retour à l'opacité d'origine pour l'icone du noeud déposé
-    }
-    this.currentDrag = {
-      node: null,
-      targetLinks: [],
-      sourceLinks: []
-    };
+    // Ré-ajuste les coordonnées x et y avec leurs modulos % à la taille d'une cellule...
+    const modX = Math.trunc(d3.event.x)%this.CELL_SIZE;
+    const modY = Math.trunc(d3.event.y)%this.CELL_SIZE;
+    d.x = d3.event.x-modX+25;
+    d.y = d3.event.y-modY+25
+
+    if ( d.x < this.PALETTE_WIDTH+this.CELL_SIZE) { d.x = this.PALETTE_WIDTH+this.CELL_SIZE; }
+    if ( d.x > this.WIDTH-this.CELL_SIZE) { d.x = this.WIDTH-this.CELL_SIZE; }
+    if ( d.y < 25) { d.y = 25; }
+    if ( d.y > 525) { d.y = 525; }
+    
+    d3.select("#node"+d.id).attr('transform', (d) => `translate(${d.x},${d.y})`).style("opacity", 1.0); // ...modification des coordonnées de l'icone...
+    this.repositionLinks(this.currentDrag.sourceLinks); // ...modification des coordonnées des liens qui ont cet icone pour élément source...
+    this.repositionLinks(this.currentDrag.targetLinks); // ...et modification des coordonnées des liens qui ont cet icone pour élément cible.
+
+    this.currentDrag = { node: null, targetLinks: [], sourceLinks: [] };
   };
 
   // ---
